@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+
+:root {
+  --body-font: "Roboto", sans-serif;
+
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+
+  --exp-color-main: #191C30;
+  --exp-color-light: #282E47;
+  --exp-color-border: #4C66C3;
+  --exp-color-blue: #5979E9;
+  --exp-color-red: #E3002B;
+
+
+  --first-color: #3037c9;
+  --second-color: #ed3023;
+  --body-color: #181818;
+  --bg-color: #202020;
+  --text-color: #fff;
+  --text-color-gray: #d2d2d2;
+  --yellow-color: #ea8c1e;
+  --blue-color: #104be3;
+
+  // responsive font sizes
+  --little: clamp(0.6rem, calc(0.55rem + 0.1vw), 0.8rem);
+  --little2: clamp(0.7rem, calc(0.7rem + 0.15vw), 0.9rem);
+  --tiny: clamp(0.8rem, calc(0.8rem + 0.2vw), 1rem);
+  --sm: clamp(1rem, calc(0.92rem + 0.39vw), 1.2rem);
+  --base: clamp(1.13rem, calc(0.98rem + 0.73vw), 1.5rem);
+  --lg: clamp(1.27rem, calc(1.03rem + 1.19vw), 1.88rem);
+  --xl: clamp(1.42rem, calc(1.06rem + 1.8vw), 2.34rem);
+  --2xl: clamp(1.6rem, calc(1.08rem + 2.59vw), 2.93rem);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--body-color);
+  color: var(--text-color);
+  font-family: var(--body-font);
+  font-size: 1rem;
+  font-weight: var(--font-light);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text-color);
+  font-weight: var(--font-bold);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  //   max-width: 100%;
+  height: auto;
+}
