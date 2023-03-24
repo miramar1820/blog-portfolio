@@ -5,6 +5,7 @@ import { PostsProvider } from "./context/posts";
 import Blog from "./routes/Blog/Blog";
 import Home from "./routes/Home/Home";
 import Navigation from "./routes/Navigation/Navigation";
+import PostsList from "./routes/PostsList/PostsList";
 
 function App() {
   return (
@@ -14,9 +15,8 @@ function App() {
         <PostsProvider>
           <Routes>
             <Route path="/" element={<Navigation />}>
-              {/* <section className="content"> */}
-              <Route index element={<Blog />} />
-              {/* </section> */}
+              <Route index element={<Home />} />
+              <Route path="blog/*" element={<Blog />} />
             </Route>
           </Routes>
         </PostsProvider>

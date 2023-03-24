@@ -8,7 +8,7 @@ import {
   query,
   getDocs,
   addDoc,
-  writeBatch
+  writeBatch,
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -41,22 +41,43 @@ export const addCollectionAndDocuments = async (
   console.log("batch data added");
 };
 
+export const addDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+  objectsToAdd.forEach((object) => {
+    batch.set(doc(collectionRef), object);
+  });
+
+  await batch.commit();
+  console.log("batch data added");
+};
+
 export const addDocument = async (collectionKey, objectToAdd) => {
   const docRef = await addDoc(collection(db, collectionKey), objectToAdd);
   console.log("Document written with ID: ", docRef.id);
 };
 
+// export const getCategoriesAndDocuments = async (collectionKey) => {
+//   const collectionRef = collection(db, collectionKey);
+//   const q = query(collectionRef);
+//   const querySnapshop = await getDocs(q);
 
-export const getCategoriesAndDocuments = async () => {
-  const collectionRef = collection(db, "posts");
-  const q = query(collectionRef);
-  const querySnapshop = await getDocs(q);
-  
-  const categoryMap = querySnapshop.docs.reduce((acc, docSnapshot) => {
-    const { name, title, items } = docSnapshot.data();
-    acc[name.toLowerCase()] = {title, items};
-    return acc;
-  }, {});
-  return categoryMap;
+//   const categoryMap = querySnapshop.docs.reduce((acc, docSnapshot) => {
+//     const { name, title, items } = docSnapshot.data();
+//     acc[name.toLowerCase()] = { title, items };
+//     return acc;
+//   }, {});
+//   return categoryMap;
+// };
+
+export const getAllDocuments = async (collectionKey) => {
+  const collectionRef = collection(db, collectionKey);
+  const querySnapshop = await getDocs(collectionRef);
+  const listItems = [];
+  querySnapshop.forEach((doc) => {
+    let newItem = doc.data();
+    newItem.id = doc.id;
+    listItems.push(newItem);
+  });
+  return listItems;
 };
-

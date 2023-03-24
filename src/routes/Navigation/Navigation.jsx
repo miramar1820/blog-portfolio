@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import "./Navigation.scss";
 
 const Navigation = () => {
@@ -7,35 +7,37 @@ const Navigation = () => {
       <nav className="nav">
         <ul className="nav__list">
           <li className="nav__item">
-            <Link href="/" className="nav__link active">
+            <NavLink to="/" className="nav__link">
               Home
-            </Link>
+            </NavLink>
           </li>
           <li className="nav__item">
-            <Link to="/" className="nav__link">
+            <NavLink to="/portfolio" className="nav__link">
               Portfolio
-            </Link>
+            </NavLink>
           </li>
           <li className="nav__item">
-            <Link to="/" className="nav__link">
+            <NavLink to="/blog" className="nav__link">
               Blog
-            </Link>
+            </NavLink>
           </li>
           <li className="nav__item">
-            <Link to="/" className="nav__link">
+            <NavLink to="/about" className="nav__link">
               About
-            </Link>
+            </NavLink>
           </li>
         </ul>
         <div className="nav__right">
-          {/* <Link to="#" className="nav__profile"><i className="ri-user-3-line"></i></Link> */}
+          {/* <NavLink to="#" className="nav__profile"><i className="ri-user-3-line"></i></NavLink> */}
           <form className="nav__search">
             <input type="search" placeholder="Search..." />
             <small>ENTER</small>
           </form>
         </div>
       </nav>
-      <Outlet />
+      <section className="content">
+        <Outlet />
+      </section>
     </>
   );
 };

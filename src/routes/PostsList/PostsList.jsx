@@ -1,43 +1,39 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import PostPreview from "../../components/PostPreview/PostPreview";
 import { PostsContext } from "../../context/posts";
+import { Pagination } from "@mui/material";
+import usePagination from "../../hooks/usePagination";
+import "./PostsList.scss";
 
 const PostsList = () => {
-  const { posts, postsCount } = useContext(PostsContext);
-  console.log(posts);
+  const { posts, postsCount, postsLoading } = useContext(PostsContext);
+  let [page, setPage] = useState(1);
+  const PER_PAGE = 1;
+
+  const count = Math.ceil(postsCount / PER_PAGE);
+  const _DATA = usePagination(posts, PER_PAGE);
+
+  const handleChange = (e, p) => {
+    setPage(p);
+    _DATA.jump(p);
+  };
   return (
     <>
-      {/* {posts.map((post) => {
-        <article className="article box" key={post.id}>
-          <div className="article__heading">
-            <a href="/article.html">
-              <img
-                src="./assets/article2.jpg"
-                alt=""
-                className="article__img"
-              />
-            </a>
-          </div>
-          <div className="article__data">
-            <a href="/article.html" className="article__title">
-              Lorem ipsum dolor sit amet.
-            </a>
-            <p className="article__text">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam
-              dolor, adipisci doloremque officia fuga quia, laboriosam
-              recusandae sunt aliquam rem magnam voluptate esse ratione! Eum
-              facere ipsum nesciunt et molestias! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Ipsam, dolor.
-            </p>
-            <div className="article__additional">
-              <small className="date">20.02.2023</small>
-              <a href="#" className="category">
-                <span className="circle"></span>
-                <small>website creating</small>
-              </a>
-            </div>
-          </div>
-        </article>;
-      })} */}
+      {postsLoading ? (
+        <div>Loading...</div>
+      ) : (
+        _DATA.currentData().map((post) => <PostPreview post={post} key={post.id} />)
+      )}
+      {(postsCount >= PER_PAGE) && <Pagination
+        count={count}
+        size="large"
+        page={page}
+        
+        shape="rounded"
+        color="primary"
+        onChange={handleChange}
+      />}
+      
     </>
   );
 };
